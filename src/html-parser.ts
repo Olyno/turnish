@@ -1,8 +1,11 @@
+import { createRequire } from 'node:module';
+
 /*
  * Set up window for Node.js
  */
 
 const root: typeof globalThis = typeof window !== 'undefined' ? window : (typeof globalThis !== 'undefined' ? globalThis : {} as any)
+const require = createRequire(import.meta.url);
 
 /*
  * Parsing HTML strings
