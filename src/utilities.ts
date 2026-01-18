@@ -129,6 +129,9 @@ export function isCodeBlockSpecialCase2(node: Node): boolean {
   if (!style) {
     return false;
   }
+  if (!style.toLowerCase().includes('font-family')) {
+    return false;
+  }
   const o = CSSTools.parse('pre {' + style + '}');
   if (!o.stylesheet.rules.length) {
     return false;
