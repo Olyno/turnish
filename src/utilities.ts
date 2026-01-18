@@ -70,14 +70,15 @@ function is(node: Node, tagNames: string[]) {
 }
 
 function has(node: Node, tagNames: string[]) {
-  return (
-    tagNames.some(function (tagName) {
-      if (node.nodeType !== NodeTypes.Element) {
-        return false;
-      }
-      return (node as Element).getElementsByTagName(tagName).length
-    })
-  )
+  if (node.nodeType !== NodeTypes.Element) {
+    return false;
+  }
+  const element = node as Element;
+  const selector = tagNames.map(name => name.toLowerCase()).join(',');
+  if (typeof element.querySelector === 'function') {
+    return element.querySelector(selector) !== null;
+  }
+  return tagNames.some((tagName) => element.getElementsByTagName(tagName).length > 0);
 }
 
 export function sanitizeWhitespace(string: string): string {
