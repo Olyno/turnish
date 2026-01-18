@@ -31,12 +31,7 @@ export class HTMLParser {
 }
 
 function createParser(): HTMLParser {
-  const isBrowser =
-    typeof window !== 'undefined' &&
-    typeof document !== 'undefined' &&
-    (typeof process === 'undefined' || (process as any).browser === true)
-
-  if (typeof window !== 'undefined') {
+  if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     // Browser environment: use DOM API
     class HTMLParserBrowser extends HTMLParser {
       parseFromString(input: string, _type?: string): Document {
